@@ -1,9 +1,10 @@
 package main
 
 import (
+	"ChopinLogoChangerGo/config"
 	"ChopinLogoChangerGo/handler"
 	"ChopinLogoChangerGo/zlibService"
-	"fmt"
+	"flag"
 	"os"
 
 	"go.uber.org/fx"
@@ -24,6 +25,13 @@ func main() {
 	app.Run()
 }
 
-func Run() {
-	fmt.Println(os.Args)
+func Run(UnpackHndl *handler.UnpackHandler, RepackHndl *handler.RepackHandler) {
+	flag.StringVar(&config.Config.LogoFile, "logo", "logo.img", "Original logo file")
+	flag.StringVar(&config.Config.OutputFile, "output", "out.bin", "Output logo file")
+	flag.Parse()
+	if os.Args[1] == "unpack" {
+		UnpackHndl.Unpack()
+	} else if os.Args[1] == "repack" {
+		RepackHndl.Repack()
+	}
 }

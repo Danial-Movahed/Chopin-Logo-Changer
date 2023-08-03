@@ -1,7 +1,7 @@
 package zlibService
 
-type ZlibCompressor struct{}
+type Compressor struct{}
 
-func NewZlibCompressor() *ZlibCompressor {
-	return &ZlibCompressor{}
+func NewZlibCompressor() *Compressor {
+	return &Compressor{}
 }

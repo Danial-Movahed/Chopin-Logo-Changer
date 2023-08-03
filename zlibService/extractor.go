@@ -8,9 +8,9 @@ import (
 	"github.com/gookit/slog"
 )
 
-type ZlibExtractor struct{}
+type Extractor struct{}
 
-func (z ZlibExtractor) Extract(src []byte) ([]byte, error) {
+func (z Extractor) Extract(src []byte) ([]byte, error) {
 	byteBuff := bytes.NewReader(src)
 	reader, err := zlib.NewReader(byteBuff)
 	if err != nil {
@@ -23,6 +23,6 @@ func (z ZlibExtractor) Extract(src []byte) ([]byte, error) {
 	return outBuff.Bytes(), nil
 }
 
-func NewZlibExtractor() *ZlibExtractor {
-	return &ZlibExtractor{}
+func NewZlibExtractor() *Extractor {
+	return &Extractor{}
 }
