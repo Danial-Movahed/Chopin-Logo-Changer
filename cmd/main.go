@@ -25,13 +25,15 @@ func main() {
 	app.Run()
 }
 
-func Run(UnpackHndl *handler.UnpackHandler, RepackHndl *handler.RepackHandler) {
+func Run(UnpackHndl *handler.UnpackHandler, RepackHndl *handler.RepackHandler, shutdowner fx.Shutdowner) {
 	flag.StringVar(&config.Config.LogoFile, "logo", "logo.img", "Original logo file")
 	flag.StringVar(&config.Config.OutputFile, "output", "out.bin", "Output logo file")
 	flag.Parse()
 	if os.Args[1] == "unpack" {
 		UnpackHndl.Unpack()
+		shutdowner.Shutdown()
 	} else if os.Args[1] == "repack" {
 		RepackHndl.Repack()
+		shutdowner.Shutdown()
 	}
 }

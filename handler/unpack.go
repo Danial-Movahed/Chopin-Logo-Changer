@@ -40,7 +40,7 @@ func (handler UnpackHandler) Unpack() error {
 	if err != nil && err != io.EOF {
 		return err
 	}
-	picture_count := binary.LittleEndian.Uint16(picture_count_bytes)
+	picture_count := binary.LittleEndian.Uint32(picture_count_bytes)
 	slog.Infof("File contains %d pictures!", picture_count)
 	slog.Infof("Reading block size (4 bytes)...")
 
@@ -93,6 +93,7 @@ func (handler UnpackHandler) Unpack() error {
 		if err != nil {
 			return err
 		}
+		binImgFile.Close()
 	}
 	return nil
 }
